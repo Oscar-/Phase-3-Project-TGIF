@@ -1,6 +1,7 @@
 from activity import Activity, CONN, CURSOR
 from feeling import Feeling, CONN, CURSOR
 from person import Person, CONN, CURSOR
+from result import Results, CONN, CURSOR
 import ipdb
 
 
@@ -24,11 +25,15 @@ feeling3.save()
 Person.create_table()
 person1.save()
 
-# activity1 = Activity("Jogging", feeling1, person2) 
-# activity2 = Activity("Reading", feeling2, person3) 
-# activity3 = Activity("Dancing", feeling3, person1) 
-# activity4 = Activity("Meditation", feeling4, person5) 
-# activity5 = Activity("Watching a Movie", feeling5, person4)
+Results.create_table()
+
+activity1 = Activity("Jogging", feeling1, person2) 
+activity2 = Activity("Reading", feeling2, person3) 
+activity3 = Activity("Dancing", feeling3, person1) 
+activity4 = Activity("Meditation", feeling4, person5) 
+activity5 = Activity("Watching a Movie", feeling5, person4)
+
+Activity.create_table()
 
 
 ipdb.set_trace()
