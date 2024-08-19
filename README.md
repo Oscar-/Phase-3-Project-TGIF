@@ -5,7 +5,8 @@ TGIF is an app where users take a quiz to reflect on their mood, receiving perso
 
 A description / diagram of your database including relationships, constraints, intended CRUD actions. This should not be code. It needs to be something visual:
 
-![Screenshot 2024-08-18 at 4 02 35 PM](https://github.com/user-attachments/assets/6f5f385b-fe1d-4af8-a87c-5bfbbc0ec5bf)
+<img width="890" alt="Screenshot 2024-08-19 at 9 43 06 AM" src="https://github.com/user-attachments/assets/c662f596-a2fb-44fe-8ea4-3d0a5b4c9020">
+
 
 CRUD: 
 
