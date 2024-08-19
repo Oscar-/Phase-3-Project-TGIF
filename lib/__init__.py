@@ -1,5 +1,5 @@
 import sqlite3
 
-CONN = sqlite3.connect('lib/resources.db')
+CONN = sqlite3.connect('resources.db')
 CURSOR = CONN.cursor()
 

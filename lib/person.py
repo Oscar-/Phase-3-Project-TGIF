@@ -23,7 +23,7 @@ class Person:
     @classmethod
     def create_table(cls):
         sql = """
-            CREATE TABLE persons(
+            CREATE TABLE IF NOT EXISTS persons(
                     id INTEGER PRIMARY KEY,
                     name TEXT
                 );
@@ -43,12 +43,12 @@ class Person:
     def save(self):
         try:
             sql= """
-                INSERT INTO person (name) VALUES (?)
+                INSERT INTO persons (name) VALUES (?)
                 """
             CURSOR.execute(sql, (self.name, ))
             CONN.commit()
             self.id= CURSOR.lastrowid
             # not sure if this is needed 
-            type(self).all[self.id] = self
+            # type(self).all[self.id] = self
         except Exception as z: 
             print(f'something went wrong: {z}')

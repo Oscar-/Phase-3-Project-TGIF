@@ -2,10 +2,12 @@ from __init__ import CURSOR, CONN
 
 
 class Feeling: 
+    all=[]
 
     def __init__(self, feeling_name, id=None,):
         self.feeling_name = feeling_name
         self.id = id 
+        Feeling.all.append(self)
 
     def __repr__(self):
         return f"<feeling={self.feeling_name}, id={self.id} />"
@@ -24,7 +26,7 @@ class Feeling:
     @classmethod
     def create_table(cls):
         sql = """
-            CREATE TABLE feelings(
+            CREATE TABLE IF NOT EXISTS feelings(
                     id INTEGER PRIMARY KEY,
                     feeling_name TEXT
                 );
@@ -50,6 +52,5 @@ class Feeling:
             CONN.commit()
             self.id= CURSOR.lastrowid
             # not sure if this is needed 
-            type(self).all[self.id] = self
         except Exception as x: 
             print(f'something went wrong: {x}')

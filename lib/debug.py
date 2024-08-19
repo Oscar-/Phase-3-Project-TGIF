@@ -16,9 +16,13 @@ person3 = Person("Charlie")
 person4 = Person("Diana") 
 person5 = Person("Ethan")
 
-feeling.create_table()
+Feeling.create_table()
+feeling1.save()
+feeling2.save()
+feeling3.save()
 
-
+Person.create_table()
+person1.save()
 
 # activity1 = Activity("Jogging", feeling1, person2) 
 # activity2 = Activity("Reading", feeling2, person3) 
