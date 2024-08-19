@@ -6,7 +6,7 @@ from __init__ import CURSOR, CONN
 from person import Person
 from feeling import Feeling
 from activity import Activity
-
+ 
 # belongs to feeling through activity
 # belongs to people
 # belongs to activity
@@ -23,25 +23,32 @@ class Results:
         self.id = id
         self.person = person_id
         self.feeling = feeling_id  
-        # (use hasattr so once created cannot be updated)
+        # (use hasattr for feeling_id so once created cannot be updated)
         self.activity = activity_id
 
     def __repr__(self):
         return f'<People person={self.person} feeling={self.feeling} activity={self.activity} />'
     
+
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of Results instances """
         sql = """
             CREATE TABLE IF NOT EXISTS results (
             id INTEGER PRIMARY KEY,
-            person TEXT,
-            feeling TEXT,
-            activity TEXT,
-            FOREIGN KEY (person_id) REFERENCES person(id))
+            person_id INTEGER,
+            feeling_id INTEGER,
+            activity_id INTEGER,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (person_id) REFERENCES person(id),
+            FOREIGN KEY (feeling_id) REFERENCES feeling(id),
+            FOREIGN KEY (activity_id) REFERENCES activity(id)
+            )
         """
         CURSOR.execute(sql)
         CONN.commit()
+
 
     @classmethod
     def drop_table(cls):
@@ -56,27 +63,29 @@ class Results:
     def save(self):
         """ Insert a new row with the person, feeling, and activity values of the current Result object.
         Update object id attribute using the primary key value of new row.
-        Save the object in local dictionary using table row's PK as dictionary key"""
+        Save the object in local dictionary using table row's PK as dictionary key
+        
+        Insert or update a row with the person, feeling, and activity values, along with timestamps."""
         
         if self.id:
-            sql="""
-                UPDATE result
-                SET person = ?, feeling = ?, activity = ?
+            sql = """
+                UPDATE results
+                SET person_id = ?, feeling_id = ?, activity_id = ?, updated_at = CURRENT_TIMESTAMP
                 WHERE id = ?
             """
             CURSOR.execute(sql, (self.person, self.feeling, self.activity, self.id))
         else:
             sql = """
-                INSERT INTO results (person, feeling, activity)
-                VALUES (?, ? , ?)
+                INSERT INTO results (person_id, feeling_id, activity_id)
+                VALUES (?, ?, ?)
             """ 
             CURSOR.execute(sql, (self.person, self.feeling, self.activity))
 
             self.id = CURSOR.lastrowid
-            
             Results.all[self.id] = self    
 
-        CONN.commit()      
+        CONN.commit()  
+ 
     
     @classmethod
     def create(cls, person, feeling, activity):
@@ -89,19 +98,21 @@ class Results:
     def instance_from_db(cls, row):
         """Return an Result instance having the attribute values from the table row."""
         # Check the dictionary for  existing instance using the row's primary key
-        result.id, person, feeling, activity = row
+        
+        result_id, person, feeling, activity, created_at, updated_at = row
 
-        if results_id in cls.all:
-            # return cls.all[result_id]
-            result = cls.all[results_id]
+        if result_id in cls.all:
+            result = cls.all[result_id]
             result.person = person
             result.feeling = feeling
             result.activity = activity
             return result
 
-        review = cls(person, feeling, activity, id=results_id)
-        cls.all[results_id] = review
-        return review
+        result = cls(person, feeling, activity, id=result_id)
+        result.created_at = created_at
+        result.updated_at = updated_at
+        cls.all[result_id] = result
+        return result
 
 
     @classmethod
@@ -115,16 +126,16 @@ class Results:
             return cls.instance_from_db(row)
         return None    
     
-    def update(self):
-        """Update the table row corresponding to the current Result instance."""
 
+    def update(self):
+        """Update the table row corresponding to the current Result instance, and refresh the updated_at timestamp."""
         sql = """
-        UPDATE results
-        SET person_id= ?, feeling_id = ?, activity_id = ?
-        WHERE id = ?
-    """
+            UPDATE results
+            SET person_id = ?, feeling_id = ?, activity_id = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        """
         CURSOR.execute(sql, (self.person, self.feeling, self.activity, self.id))
-        CONN.commit()
+        CONN.commit()        
 
     def delete(self):
         """Delete the table row corresponding to the current Result instance,
@@ -158,13 +169,18 @@ class Results:
     @property
     def feeling_id(self):
         return self._feeling_id
-    
-    ##add hasattr here 
+
     @feeling_id.setter
     def feeling_id(self, feeling_id):
-        if(not hasattr(self, 'feeling_id')) and not isinstance(feeling_id, int) or Feeling.find_by_id(feeling_id) is None:
+    # Prevent updating the feeling_id if it has already been set
+        if hasattr(self, '_feeling_id'):
+            raise AttributeError("feeling_id cannot be updated once set.")
+    
+    # Validate and set the feeling_id if it's being set for the first time
+        if not isinstance(feeling_id, int) or Feeling.find_by_id(feeling_id) is None:
             raise ValueError("Feeling ID must reference a valid feeling")
-        self._feeling_id = feeling_id
+    
+        self._feeling_id = feeling_id       
 
     @property
     def person_id(self):
