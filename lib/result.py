@@ -1,11 +1,11 @@
-import sqlite3
-CONN = sqlite3.connect('lib/resources.db', timeout=10)
-CURSOR = CONN.cursor()
-
-# from __init__ import CURSOR, CONN
 from person import Person
 from feeling import Feeling
 from activity import Activity
+from __init__ import CURSOR, CONN
+
+# import sqlite3
+# CONN = sqlite3.connect('lib/resources.db', timeout=10)
+# CURSOR = CONN.cursor()
  
 # belongs to feeling through activity
 # belongs to people
@@ -31,18 +31,18 @@ class Results:
 
     @classmethod
     def create_table(cls):
-        """ Create a new table to persist the attributes of Results instances """
+        # """ Create a new table to persist the attributes of Results instances """
         sql = """
             CREATE TABLE IF NOT EXISTS results (
-            id INTEGER PRIMARY KEY,
-            person_id INTEGER,
-            feeling_id INTEGER,
-            activity_id INTEGER,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (person_id) REFERENCES person(id),
-            FOREIGN KEY (feeling_id) REFERENCES feeling(id),
-            FOREIGN KEY (activity_id) REFERENCES activity(id)
+                id INTEGER PRIMARY KEY,
+                person_id INTEGER,
+                feeling_id INTEGER,
+                activity_id INTEGER,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (person_id) REFERENCES person(id),
+                FOREIGN KEY (feeling_id) REFERENCES feeling(id),
+                FOREIGN KEY (activity_id) REFERENCES activity(id)
             )
         """
         CURSOR.execute(sql)
@@ -125,7 +125,6 @@ class Results:
             return cls.instance_from_db(row)
         return None    
     
-
     def update(self):
         """Update the table row corresponding to the current Result instance, and refresh the updated_at timestamp."""
         sql = """
@@ -159,6 +158,7 @@ class Results:
     @property
     def activity_id(self):
         return self._activity_id
+    
     @activity_id.setter
     def activity_id(self, activity_id):
         if not isinstance(activity_id, int) or Activity.find_by_id(activity_id) is None:
@@ -184,6 +184,7 @@ class Results:
     @property
     def person_id(self):
         return self._person_id
+    
     @person_id.setter
     def person_id(self, person_id):
         if not isinstance(person_id, int) or Person.find_by_id(person_id) is None:
@@ -193,6 +194,4 @@ class Results:
 
 
     
-
-
 
