@@ -1,8 +1,8 @@
-# import sqlite3
-# CONN = sqlite3.connect('lib/resources.db', timeout=10)
-# CURSOR = CONN.cursor()
+import sqlite3
+CONN = sqlite3.connect('lib/resources.db', timeout=10)
+CURSOR = CONN.cursor()
 
-from __init__ import CURSOR, CONN
+# from __init__ import CURSOR, CONN
 from person import Person
 from feeling import Feeling
 from activity import Activity
@@ -11,7 +11,6 @@ from activity import Activity
 # belongs to people
 # belongs to activity
 
-# create fxn:
 # created_at(TEXT)
 # updated_at
 
