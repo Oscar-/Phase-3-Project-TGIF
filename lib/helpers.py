@@ -56,6 +56,22 @@ def print_all_feelings():
     else:
         print('No feelings found')    
 
+def print_activity(id):
+    activity_instance = Activity.find_by_id(id)
+    if activity_instance:
+        print(f'ID: {activity_instance.id}, Activity Name: {activity_instance.activity_name}')
+    else:
+        print(f'Activity with ID {id} not found')
+
+def print_all_activities():
+    activities = Activity.get_all()
+    if activities:
+        for activity in activities:
+            print(f'ID: {activity.id}, Activity Name: {activity.activity_name}')
+    else:
+        print('No activities found')
+    
+
 
 
 
