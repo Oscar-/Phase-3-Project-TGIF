@@ -21,17 +21,25 @@ Feeling.create_table()
 feeling1.save()
 feeling2.save()
 feeling3.save()
+feeling4.save()
+feeling5.save()
+
 
 Person.create_table()
 person1.save()
+person2.save()
+person3.save()
+person4.save()
+person5.save()
 
 Results.create_table()
 
-activity1 = Activity("Jogging", feeling1, person2) 
-activity2 = Activity("Reading", feeling2, person3) 
-activity3 = Activity("Dancing", feeling3, person1) 
-activity4 = Activity("Meditation", feeling4, person5) 
-activity5 = Activity("Watching a Movie", feeling5, person4)
+activity1 = Activity("Jogging", feeling1.id, person2.id) 
+activity2 = Activity("Reading", feeling2.id, person3.id) 
+activity3 = Activity("Dancing", feeling3.id, person1.id) 
+activity4 = Activity("Meditation", feeling4.id, person5.id) 
+activity5 = Activity("Watching a Movie", feeling5.id, person4.id)
+
 
 Activity.create_table()
 

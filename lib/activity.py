@@ -43,9 +43,9 @@ class Activity:
     def save(self):
         try:
             sql= """
-                INSERT INTO activity (activity_name) VALUES (?)
+                INSERT INTO activity (activity_name, feeling_id, person_id) VALUES (?, ?, ?)
                 """
-            CURSOR.execute(sql, (self.activity_name, ))
+            CURSOR.execute(sql, (self.activity_name, self.feeling_id, self.person_id ))
             CONN.commit()
             self.id= CURSOR.lastrowid
             # not sure if this is needed 
@@ -60,10 +60,10 @@ class Activity:
         return self._person_id
     @person_id.setter
     def person_id(self, value):
-        if isinstance(value, Person):
+        if isinstance(value, int):
             self._person_id = value 
         else: 
-            raise ValueError("name has to be an instance of a Person")
+            raise ValueError("name has to be an ID of a Person")
 
     @property
     def activity_name(self):
@@ -82,7 +82,7 @@ class Activity:
     def feeling_id(self, value):
         if hasattr(self, '_feeling_id'):
             raise AttributeError("feeling_id cannot be updated once set.")
-        if isinstance(value, Feeling):
+        if isinstance(value, int):
         # and Feeling(value):
             self._feeling_id = value
         else:
@@ -96,7 +96,7 @@ class Activity:
     #     return[cls.create_instance(row) for row in CURSOR.execute(sql, (id, )).fetchall()]
     
     @classmethod
-    def get_all_feeling(cls):
+    def get_all(cls):
         """Return a list containing one Activity instance per table row"""
         sql = "SELECT * FROM activity"
         CURSOR.execute(sql)
