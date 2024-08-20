@@ -155,6 +155,38 @@ class Results:
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
     
+    # @classmethod 
+    # def get_person_name(cls, id):
+    #     sql = """ 
+    #         SELECT person.id FROM result JOIN person ON person.id = result.id WHERE feeling.id = ?;
+    #         """
+    #     return[cls.create_instance(row) for row in CURSOR.execute(sql, (id, )).fetchall()]
+
+    # @classmethod
+    # def get_feeling_name(cls, id):
+    #     sql = """ 
+    #         SELECT person_id, feeling_id, activity_id FROM results JOIN feelings ON results.feeling_id = feeling.id WHERE feeling.id = ?;
+    #     """
+    #     return[cls.create_instance(row) for row in CURSOR.execute(sql, (id, )).fetchall()]
+
+
+
+# @classmethod 
+#     def get_owner_apps(cls, id):
+#         sql = """ 
+#             SELECT appointments.id, pet_id, procedure_id FROM appointments JOIN pets ON appointments.pet_id = pets.id WHERE pets.owner_id = ?;
+#         """
+#         return[cls.create_instance(row) for row in CURSOR.execute(sql, (id, )).fetchall()]
+    
+#     @classmethod
+#     def get_pet_apps(cls, id):
+#         sql = """ 
+#             SELECT appointments.id, pet_id, procedure_id FROM appointments JOIN pets ON appointments.pet_id = pets.id WHERE pets.id = ?;
+#         """
+#         return[cls.create_instance(row) for row in CURSOR.execute(sql, (id, )).fetchall()]
+
+
+    
     @property
     def activity_id(self):
         return self._activity_id
