@@ -70,12 +70,12 @@ class Activity:
             print(f'something went wrong: {x}')
 
 
-
     @property
     def person_id(self):
         return self._person_id
 
     @person_id.setter
+
     def person_id(self, value):
         if isinstance(value, int):
             self._person_id = value 
@@ -98,6 +98,7 @@ class Activity:
         return self._feeling_id 
     
     @feeling_id.setter
+
     def feeling_id(self, value):
         if hasattr(self, '_feeling_id'):
             raise AttributeError("feeling_id cannot be updated once set.")
@@ -157,10 +158,14 @@ class Activity:
         id, activity_name, feeling_id, person_id = row
         return cls(activity_name=activity_name, feeling_id=feeling_id, person_id=person_id, id=id)
 
+    @classmethod
+    def find_by_id(cls, id):
+        """Return an Activity instance having the attribute values from the table row."""
+        sql = "SELECT * FROM activity WHERE id = ?"
+        CURSOR.execute(sql, (id,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls.instance_from_db(row)
+        return None  
     
-    # @classmethod
-    # def instance_from_db(cls, row):
-    #     """Create an instance from a database row."""
-    #     id, activity_name = row
-    #     return cls(activity_name=activity_name, id=id)
-        
+    

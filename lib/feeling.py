@@ -78,3 +78,16 @@ class Feeling:
         CURSOR.execute(sql)
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
+    
+    @classmethod
+    def get_feelings_for_person(cls, person_id):
+        """Return all feelings associated with the given person_id."""
+        sql = """
+            SELECT feelings.id, feelings.feeling_name
+            FROM feelings
+            JOIN activity ON feelings.id = activity.feeling_id 
+            WHERE activity.person_id = ?
+        """;
+        CURSOR.execute(sql, (person_id,))
+        rows = CURSOR.fetchall()
+        return [cls.instance_from_db(row) for row in rows]
