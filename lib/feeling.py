@@ -54,3 +54,27 @@ class Feeling:
             # not sure if this is needed 
         except Exception as x: 
             print(f'something went wrong: {x}')
+
+    @classmethod
+    def find_by_id(cls, id):
+        """Return a Feeling instance having the attribute values from the table row."""
+        sql = "SELECT * FROM feelings WHERE id = ?"
+        CURSOR.execute(sql, (id,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls.instance_from_db(row)
+        return None
+
+    @classmethod
+    def instance_from_db(cls, row):
+        """Create an instance from a database row."""
+        id, feeling_name = row
+        return cls(feeling_name=feeling_name, id=id)
+    
+    @classmethod
+    def get_all(cls):
+        """Return all Feeling instances from the database."""
+        sql = "SELECT * FROM feelings"
+        CURSOR.execute(sql)
+        rows = CURSOR.fetchall()
+        return [cls.instance_from_db(row) for row in rows]

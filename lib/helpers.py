@@ -2,41 +2,61 @@ from person import Person
 from feeling import Feeling
 from activity import Activity
 from result import Results
+from __init__ import CURSOR, CONN
 
+#we'll need print person, cur person, all persons
 
-# ✅ 2. A function `print_owner(id)` that finds the owner with id `id` and prints it out.
+#feeling , all feelings
+
+#activity, all activities
+
+# print_all_feelings_for_person
+# print_all_activities_for_person
+# print_all_results_for_
+
+cur_person = None
+
+def set_cur_person(person_id):
+    global cur_person
+    cur_person = Person.find_by_id(person_id)
+
+def print_cur_person():
+    if cur_person:
+        print(f'ID: {cur_person.id}, Name: {cur_person.name}')
+    else:
+        print('No current person set')
+
 def print_person(id):
-    persons = Person.find_by_id(id)
-    for person in persons:
-        print(f'{person.id}')
+    person_instance = Person.find_by_id(id)
+    if person_instance:
+        print(f'ID: {person_instance.id}, Name: {person_instance.name}')
+    else:
+        print(f'Person with ID {id} not found')
 
-# # ✅ 3. A function `print_pet(id)` that finds the pet with id `id` and prints it out.
-# def print_pet(id):
-#     pass
-
-# ✅ 4. A function `print_all_persons()` that prints all persons
 def print_all_persons():
-    # get all the owners 
     persons = Person.get_all()
-    for person in persons:
-        print(f'{person.name}')
+    if persons:
+        for person in persons:
+            print(f'ID: {person.id}, Name: {person.name}')
+    else:
+        print('No persons found')
 
-# # ✅ 5. A function `print_all_pets_for_owner(id)` that prints all pets for the owner with the id `id`
-# def print_all_pets_for_owner(id):
-#     pets = Pet.get_owner_pets(id)
-#     for pet in pets:
-#         print(f'{pet.id}. {pet.name}')
+def print_feeling(id):
+    feeling_instance = Feeling.find_by_id(id)
+    if feeling_instance:
+        print(f'ID: {feeling_instance.id}, Feeling Name: {feeling_instance.feeling_name}')
+    else:
+        print(f'Feeling with ID {id} not found')
+    
+def print_all_feelings():
+    feelings = Feeling.get_all()
+    if feelings:
+        for feeling in feelings:
+            print(f'ID: {feeling.id}, Feeling Name: {feeling.feeling_name}')
+    else:
+        print('No feelings found')    
 
-# # ✅ 6. A function `print_all_apps_for_owner(id)` that prints all appointments for all the pets for owner with id `id`
-# def print_all_apps_for_owner(id):
-#     pass
 
-# # ✅ 7. A function `print_apps_for_one_pet(id)` that prints all the appointments for the pet with id `id`
-# def print_apps_for_one_pet(id):
-#     pass
 
-# # ✅ 8. A function `exit_program()` that prints will exit our cli
-# def exit_program():
-#     pass
 
 import ipdb; ipdb.set_trace()
