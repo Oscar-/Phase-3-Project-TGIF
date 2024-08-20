@@ -54,7 +54,40 @@ def print_all_feelings():
         for feeling in feelings:
             print(f'ID: {feeling.id}, Feeling Name: {feeling.feeling_name}')
     else:
-        print('No feelings found')    
+        print('No feelings found')
+
+def print_all_feelings_for_person(person_id): 
+    person_id = int(person_id) # Ensure person_id is an integer 
+    feelings = Feeling.get_feelings_for_person(person_id) # Use the correct variable 
+    for feeling in feelings: 
+        print(f'{feeling.id}. {feeling.feeling_name}') # Use the correct attribute name
+
+def print_activity(id):
+    activity_instance = Activity.find_by_id(id)
+    if activity_instance:
+        print(f'ID: {activity_instance.id}, Activity Name: {activity_instance.activity_name}')
+    else:
+        print(f'Activity with ID {id} not found')
+        
+def print_all_activities():
+    activities = Activity.get_all()
+    if activities:
+        for activity in activities:
+            print(f'ID: {activity.id}, Activity Name: {activity.activity_name}')
+    else:
+        print('No activities found')
+
+def print_all_activity_for_person():
+    pass
+
+def print_results_for_person():
+    pass
+
+def print_results_for_activity():
+    pass
+
+def print_results_for_feeling():
+    pass
 
 
 

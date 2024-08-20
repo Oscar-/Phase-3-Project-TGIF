@@ -42,23 +42,28 @@ class Activity:
     
     def save(self):
         try:
-            sql= """
-                INSERT INTO activity (activity_name, feeling_id, person_id) VALUES (?, ?, ?)
+            if self.id is None:
+                sql = """
+                    INSERT INTO activity (activity_name, feeling_id, person_id) VALUES (?, ?, ?)
+                    """
+                CURSOR.execute(sql, (self.activity_name, self.feeling_id, self.person_id))
+                CONN.commit()
+                self.id = CURSOR.lastrowid
+            else:
+                sql = """
+                    UPDATE activity SET activity_name = ?, feeling_id = ?, person_id = ? WHERE id = ?
                 """
-            CURSOR.execute(sql, (self.activity_name, self.feeling_id, self.person_id ))
-            CONN.commit()
-            self.id= CURSOR.lastrowid
-            # not sure if this is needed 
+                CURSOR.execute(sql, (self.activity_name, self.feeling_id, self.person_id, self.id))
+                CONN.commit()
         except Exception as x: 
             print(f'something went wrong: {x}')
-
-
 
 
     @property
     def person_id(self):
         return self._person_id
     @person_id.setter
+
     def person_id(self, value):
         if isinstance(value, int):
             self._person_id = value 
@@ -68,6 +73,7 @@ class Activity:
     @property
     def activity_name(self):
         return self._activity_name 
+    
     @activity_name.setter
     def activity_name(self, value):
         if isinstance(value, str) and len(value) > 0:
@@ -79,6 +85,7 @@ class Activity:
     def feeling_id(self):
         return self._feeling_id 
     @feeling_id.setter
+
     def feeling_id(self, value):
         if hasattr(self, '_feeling_id'):
             raise AttributeError("feeling_id cannot be updated once set.")
@@ -103,14 +110,20 @@ class Activity:
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
     
-    @classmethod 
-    def create_instance(cls, row):
-        activity = cls(
-            id=row[0],
-            activity=row[1],
-            feeling=row[2],
-            person=row[3]
-        )
-        return activity
+    @classmethod
+    def instance_from_db(cls, row):
+        """Create an instance from a database row."""
+        id, activity_name, feeling_id, person_id = row
+        return cls(activity_name=activity_name, feeling_id=feeling_id, person_id=person_id, id=id)
 
-        
+    @classmethod
+    def find_by_id(cls, id):
+        """Return an Activity instance having the attribute values from the table row."""
+        sql = "SELECT * FROM activity WHERE id = ?"
+        CURSOR.execute(sql, (id,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls.instance_from_db(row)
+        return None  
+    
+    

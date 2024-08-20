@@ -83,3 +83,5 @@ class Person:
         CURSOR.execute(sql)
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
+    
+    
