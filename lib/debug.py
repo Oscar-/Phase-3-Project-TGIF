@@ -44,11 +44,11 @@ activity2 = Activity("Write tragic poetry in the dark", feeling2.id, person2.id)
 activity3 = Activity("Plan world domination", feeling3.id, person3.id)             # Excited
 activity4 = Activity("Imagine worst-case scenarios", feeling4.id, person4.id)      # Anxious
 activity5 = Activity("Contemplate existence while napping", feeling5.id, person5.id)  # Relaxed
-activity6 = Activity("Laugh maniacally in the mirror", feeling5.id, person6.id)    # Happy
-activity7 = Activity("Practice your evil laugh", feeling4.id, person7.id)          # Excited
-activity8 = Activity("Dance on the grave of your fears", feeling1.id, person3.id)  # Happy
-activity9 = Activity("Pretend to be a ghost in your own house", feeling2.id, person6.id)  # Relaxed
-activity10 = Activity("Count the ways things could go wrong", feeling3.id, person7.id)  # Anxious
+activity6 = Activity("Laugh maniacally in the mirror", feeling1.id, person6.id)    # Happy
+activity7 = Activity("Practice your evil laugh", feeling4.id, person7.id)          # Anxious
+activity8 = Activity("Dance on the grave of your fears", feeling5.id, person3.id)  # Relaxed
+activity9 = Activity("Pretend to be a ghost in your own house", feeling2.id, person6.id)  # Sad
+activity10 = Activity("Count the ways things could go wrong", feeling3.id, person7.id)  # Excited
 
 Activity.create_table()
 activity1.save()

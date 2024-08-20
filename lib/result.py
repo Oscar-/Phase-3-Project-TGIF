@@ -125,6 +125,11 @@ class Results:
             return cls.instance_from_db(row)
         return None    
     
+        # if not row:
+        #     return None 
+        # else: 
+        #     return cls.create_instance(row)
+    
     def update(self):
         """Update the table row corresponding to the current Result instance, and refresh the updated_at timestamp."""
         sql = """

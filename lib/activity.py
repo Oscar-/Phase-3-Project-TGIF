@@ -105,12 +105,12 @@ class Activity:
     
     @classmethod 
     def create_instance(cls, row):
-        app = cls(
+        activity = cls(
             id=row[0],
             activity=row[1],
             feeling=row[2],
             person=row[3]
         )
-        return app
+        return activity
 
         

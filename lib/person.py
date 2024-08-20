@@ -42,13 +42,44 @@ class Person:
     
     def save(self):
         try:
-            sql= """
-                INSERT INTO persons (name) VALUES (?)
+            if self.id is None:
+                sql = """
+                    INSERT INTO persons (name) VALUES (?)
                 """
-            CURSOR.execute(sql, (self.name, ))
-            CONN.commit()
-            self.id= CURSOR.lastrowid
-            # not sure if this is needed 
-            # type(self).all[self.id] = self
+                CURSOR.execute(sql, (self.name, ))
+                CONN.commit()
+                self.id= CURSOR.lastrowid
+                # not sure if this is needed 
+                # type(self).all[self.id] = self
+            else:
+                sql = """
+                    UPDATE persons SET name = ? WHERE id = ?
+                """
+                CURSOR.execute(sql, (self.name, self.id))
+                CONN.commit()
         except Exception as z: 
             print(f'something went wrong: {z}')
+
+    @classmethod
+    def find_by_id(cls, id):
+        """Return a Person instance having the attribute values from the table row."""
+        sql = "SELECT * FROM persons WHERE id = ?"
+        CURSOR.execute(sql, (id,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls.instance_from_db(row)
+        return None
+    
+    @classmethod
+    def instance_from_db(cls, row):
+        """Create an instance from a database row."""
+        id, name = row
+        return cls(id=id, name=name)            
+    
+    @classmethod
+    def get_all(cls):
+        """Return all Person instances from the database."""
+        sql = "SELECT * FROM persons"
+        CURSOR.execute(sql)
+        rows = CURSOR.fetchall()
+        return [cls.instance_from_db(row) for row in rows]
