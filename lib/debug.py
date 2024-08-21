@@ -14,7 +14,7 @@ person5 = Person("Jason")
 person6 = Person("Stefan")
 person7 = Person("Rachel")
 
-Person.create_table()
+
 person1.save()
 person2.save()
 person3.save()

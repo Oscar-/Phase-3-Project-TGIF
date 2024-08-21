@@ -51,12 +51,12 @@ class Person:
                 self.id= CURSOR.lastrowid
                 # not sure if this is needed 
                 # type(self).all[self.id] = self
-            else:
-                sql = """
-                    UPDATE persons SET name = ? WHERE id = ?
-                """
-                CURSOR.execute(sql, (self.name, self.id))
-                CONN.commit()
+            # else:
+            #     sql = """
+            #         UPDATE persons SET name = ? WHERE id = ?
+            #     """
+            #     CURSOR.execute(sql, (self.name, self.id))
+            #     CONN.commit()
         except Exception as z: 
             print(f'something went wrong: {z}')
 

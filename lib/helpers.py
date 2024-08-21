@@ -29,7 +29,7 @@ def print_cur_person():
 def print_person(id):
     person_instance = Person.find_by_id(id)
     if person_instance:
-        print(f'ID: {person_instance.id}, Name: {person_instance.name}')
+        print(f'Name: {person_instance.name}')
     else:
         print(f'Person with ID {id} not found')
 
@@ -37,7 +37,7 @@ def print_all_persons():
     persons = Person.get_all()
     if persons:
         for person in persons:
-            print(f'ID: {person.id}, Name: {person.name}')
+            print(f'Name: {person.name}')
     else:
         print('No persons found')
 
@@ -92,4 +92,4 @@ def print_results_for_feeling():
 
 
 
-import ipdb; ipdb.set_trace()
+# import ipdb; ipdb.set_trace()
