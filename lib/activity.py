@@ -5,12 +5,15 @@ from __init__ import CURSOR, CONN
 
 class Activity: 
 
+    all = []
+
     def __init__(self, activity_name, feeling_id, person_id, id=None):
 
         self.activity_name = activity_name
         self.feeling_id = feeling_id
         self.person_id = person_id
         self.id = id
+        Activity.all.append(self)
      
 
     def __repr__(self):

@@ -38,6 +38,7 @@ feeling4.save()
 feeling5.save()
 
 
+
 # Dark Humor Activities
 activity1 = Activity("Smile creepily at strangers", feeling1.id, person1.id)       # Happy
 activity2 = Activity("Write tragic poetry in the dark", feeling2.id, person2.id)   # Sad

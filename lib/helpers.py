@@ -80,7 +80,7 @@ def print_all_activities():
     activities = Activity.get_all()
     if activities:
         for activity in activities:
-            print(f'ID: {activity.id}, Activity Name: {activity.activity_name}')
+            print(f'Activity: {activity.activity_name}')
     else:
         print('No activities found')
 
@@ -107,7 +107,7 @@ def print_all_activities():
     activities = Activity.get_all()
     if activities:
         for activity in activities:
-            print(f'ID: {activity.id}, Activity Name: {activity.activity_name}')
+            print(f'Activity: {activity.activity_name}')
     else:
         print('No activities found')
 
