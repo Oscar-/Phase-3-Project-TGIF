@@ -24,13 +24,13 @@ Step 2: Clone the Repository
 
 2. Clone the Repository: Copy the URL of the forked repository from your GitHub account and run the following command in the terminal:
 
-- git clone <your-forked-repository-URL>
+- git clone "your-forked-repository-URL"
 
 Step 3: Open the Project in VS Code
 
 1. Navigate to the Project Directory: Change into the directory of your cloned repository by running:
 
-- cd <your-repository-name>
+- cd "your-repository-name"
 
 2. Open VS Code: Run the following command to open the project in Visual Studio Code:
 
