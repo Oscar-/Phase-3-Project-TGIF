@@ -43,7 +43,17 @@ class Activity:
         CURSOR.execute(sql)
         CONN.commit()
     
-
+    # def save(self):
+    #     try:
+    #         sql= """
+    #             INSERT INTO activity (activity_name, feeling_id, person_id) VALUES (?, ?, ?)
+    #             """
+    #         CURSOR.execute(sql, (self.activity_name, self.feeling_id, self.person_id ))
+    #         CONN.commit()
+    #         self.id= CURSOR.lastrowid
+    #         # not sure if this is needed 
+    #     except Exception as x: 
+    #         print(f'something went wrong: {x}')
     def save(self):
         try:
             if self.id is None:
@@ -100,8 +110,6 @@ class Activity:
             self._feeling_id = value
         else:
             raise ValueError("Feeling ID must be the ID of an existing feeling instance.")
-
- 
 
     @classmethod
     def find_by_id(cls, id):

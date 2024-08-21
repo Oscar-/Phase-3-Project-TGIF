@@ -161,8 +161,37 @@ def sub4_main():
             choice = input('Enter choice\n')
             if int(choice) == 0:
                 break  # Return to the previous menu
-
+        
+    
          
+def select_feeling():
+    print("Select a feeling by number:")
+    feelings = Feeling.get_all()
+    for index, feeling in enumerate(feelings, start=1):
+        print(f"{index}. {feeling.feeling_name}")
+    
+    try:
+        feeling_choice = int(input("Enter choice:\n"))
+        if 1 <= feeling_choice <= len(feelings):
+            selected_feeling = feelings[feeling_choice - 1]
+            print(f"You selected: {selected_feeling.feeling_name}")
+            handle_selected_feeling(selected_feeling)
+        else:
+            print("Invalid choice. Please try again.")
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+
+def handle_selected_feeling(feeling):
+    # Example logic: Display feeling details
+    print(f"Details for feeling: {feeling.feeling_name}")
+    activities = Activity.get_activities_by_feeling(feeling.id)
+    if activities:
+        print("Activities related to this feeling:")
+        for activity in activities:
+            print(f"- {activity.activity_name}")
+    else:
+        print("No activities found for this feeling.")
+
 def menu():
     print(f"""
         Welcome to TGIF!

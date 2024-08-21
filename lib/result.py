@@ -3,7 +3,6 @@ from feeling import Feeling
 from activity import Activity
 from __init__ import CURSOR, CONN
 
-
 class Results:
 
     all = {}
@@ -115,6 +114,7 @@ class Results:
             return cls.instance_from_db(row)
         return None    
     
+   
     def update(self):
         """Update the table row corresponding to the current Result instance, and refresh the updated_at timestamp."""
         sql = """
@@ -145,7 +145,6 @@ class Results:
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
     
-   
     @property
     def activity_id(self):
         return self._activity_id
@@ -181,9 +180,3 @@ class Results:
         if not isinstance(person_id, int) or Person.find_by_id(person_id) is None:
             raise ValueError("Person ID must reference a valid person")
         self._person_id = person_id
-    
-    
-
-
-    
-

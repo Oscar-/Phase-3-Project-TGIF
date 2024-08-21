@@ -7,6 +7,7 @@ from __init__ import CURSOR, CONN
 
 cur_person = None
 
+
 def print_cur_person():
     if cur_person:
         print(f'ID: {cur_person.id}, Name: {cur_person.name}')
@@ -63,7 +64,6 @@ def print_all_activities():
             print(f'Activity: {activity.activity_name}')
     else:
         print('No activities found')
-
 
 def print_activity(id):
     activity_instance = Activity.find_by_id(id)
