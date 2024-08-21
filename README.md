@@ -14,49 +14,49 @@ CRUD:
 
 Step 1: Fork the Repository
 
-Go to the Repository: Navigate to the GitHub page of the repository you want to fork.
+1. Go to the Repository: Navigate to the GitHub page of the repository you want to fork.
 
-Fork the Repository: Click the "Fork" button at the top right of the page. This will create a copy of the repository in your GitHub account.
+2. Fork the Repository: Click the "Fork" button at the top right of the page. This will create a copy of the repository in your GitHub account.
 
 Step 2: Clone the Repository
 
-Open Your Terminal: Use any terminal application of your choice.
+1. Open Your Terminal: Use any terminal application of your choice.
 
-Clone the Repository: Copy the URL of the forked repository from your GitHub account and run the following command in the terminal:
+2. Clone the Repository: Copy the URL of the forked repository from your GitHub account and run the following command in the terminal:
 
 git clone <your-forked-repository-URL>
 
 Step 3: Open the Project in VS Code
 
-Navigate to the Project Directory: Change into the directory of your cloned repository by running:
+1. Navigate to the Project Directory: Change into the directory of your cloned repository by running:
 
 cd <your-repository-name>
 
-Open VS Code: Run the following command to open the project in Visual Studio Code:
+2. Open VS Code: Run the following command to open the project in Visual Studio Code:
 
 code .
 
 Step 4: Install Dependencies
 
-Install pipenv: Ensure you have pipenv installed by running:
+1. Install pipenv: Ensure you have pipenv installed by running:
 
 pip install pipenv
 
-Install Project Dependencies: Run the following command to install all necessary dependencies for the project:
+2. Install Project Dependencies: Run the following command to install all necessary dependencies for the project:
 
 pipenv install
 
 Step 5: Access the Quiz Game
 
-Activate the Virtual Environment: Enter the pipenv shell by running:
+1. Activate the Virtual Environment: Enter the pipenv shell by running:
 
 pipenv shell
 
-Navigate to the CLI Folder: Access the cli.py file by navigating to the appropriate directory:
+2. Navigate to the CLI Folder: Access the cli.py file by navigating to the appropriate directory:
 
 cd lib
 
-Run the Quiz Game: Start the quiz game by running:
+3. Run the Quiz Game: Start the quiz game by running:
 
 python cli.py
 
