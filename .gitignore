@@ -1,2 +1,5 @@
 resources.db
 */resources.db 
+
+.venv/
+*/venv
