@@ -9,6 +9,7 @@ class Person:
     @property
     def name(self):
         return self._name
+    
     @name.setter
     def name(self, value):
         if isinstance(value, str) and len(value) > 0:
@@ -49,14 +50,12 @@ class Person:
                 CURSOR.execute(sql, (self.name, ))
                 CONN.commit()
                 self.id= CURSOR.lastrowid
-                # not sure if this is needed 
-                # type(self).all[self.id] = self
-            # else:
-            #     sql = """
-            #         UPDATE persons SET name = ? WHERE id = ?
-            #     """
-            #     CURSOR.execute(sql, (self.name, self.id))
-            #     CONN.commit()
+            else:
+                sql = """
+                    UPDATE persons SET name = ? WHERE id = ?
+                """
+                CURSOR.execute(sql, (self.name, self.id))
+                CONN.commit()
         except Exception as z: 
             print(f'something went wrong: {z}')
 
