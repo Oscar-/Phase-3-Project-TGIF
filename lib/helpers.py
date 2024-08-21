@@ -14,11 +14,18 @@ from __init__ import CURSOR, CONN
 # print_all_activities_for_person
 # print_all_results_for_
 
+# global cur_person
 cur_person = None
 
-def set_cur_person(person_id):
-    global cur_person
-    cur_person = Person.find_by_id(person_id)
+# def set_cur_person(person_id):
+#     person_id = int(person_id)  # Ensure person_id is an integer
+#     cur_person = Person.find_by_id(person_id)
+#     if cur_person:
+#         print(f"Current person set to: {cur_person.name}")
+#     else:
+#         print(f"Person with ID {person_id} not found.")
+
+#comm via param and return statements
 
 def print_cur_person():
     if cur_person:
@@ -103,9 +110,17 @@ def print_all_activities():
             print(f'ID: {activity.id}, Activity Name: {activity.activity_name}')
     else:
         print('No activities found')
+
+def print_all_activities_for_person(person_id):
+    activities = Activity.get_activities_for_person(person_id)
+    if activities:
+        for activity in activities:
+            print(f'Activity ID: {activity.id}, Name: {activity.activity_name}, Feeling ID: {activity.feeling_id}')
+    else:
+        print(f'No activities found for person with ID {person_id}.')
     
 
 
 
 
-import ipdb; ipdb.set_trace()
+# import ipdb; ipdb.set_trace()
