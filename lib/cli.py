@@ -5,8 +5,6 @@ from result import Results
 from helpers import (
     print_person,
     print_cur_person,
-    # set_cur_person,
-    # cur_person,
     print_feeling,
     print_all_feelings,
     print_all_feelings_for_person,
@@ -14,7 +12,6 @@ from helpers import (
     print_all_activities,
     print_all_activities_for_person
 )
-# import helpers
 
 cur_feeling = None
 cur_activity = None
@@ -168,25 +165,6 @@ def sub4_main():
                 break  # Return to the previous menu
         
     
-
-
-            # elif int(choice) == 2:
-            #     print_activity(2)
-            # elif int(choice) == 3:
-
-            #     if cur_person:
-            #         print_all_feelings_for_person(cur_person.id)
-            #     else:
-            #         print("No person selected. Please select a person first.")
-            # elif int(choice) == 4:
-            #     if cur_person:
-            #         print_all_activities_for_person(cur_person.id)
-            #     else:
-            #         print("No person selected. Please select a person first.")
-            # else:
-            #     print("Invalid choice. Please try again.")
-
-
          
 def select_feeling():
     print("Select a feeling by number:")

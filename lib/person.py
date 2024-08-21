@@ -81,6 +81,4 @@ class Person:
         sql = "SELECT * FROM persons"
         CURSOR.execute(sql)
         rows = CURSOR.fetchall()
-        return [cls.instance_from_db(row) for row in rows]
-    
-    
+        return [cls.instance_from_db(row) for row in rows]   
