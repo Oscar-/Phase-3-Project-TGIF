@@ -24,41 +24,41 @@ Step 2: Clone the Repository
 
 2. Clone the Repository: Copy the URL of the forked repository from your GitHub account and run the following command in the terminal:
 
-git clone <your-forked-repository-URL>
+- git clone <your-forked-repository-URL>
 
 Step 3: Open the Project in VS Code
 
 1. Navigate to the Project Directory: Change into the directory of your cloned repository by running:
 
-cd <your-repository-name>
+- cd <your-repository-name>
 
 2. Open VS Code: Run the following command to open the project in Visual Studio Code:
 
-code .
+- code .
 
 Step 4: Install Dependencies
 
 1. Install pipenv: Ensure you have pipenv installed by running:
 
-pip install pipenv
+- pip install pipenv
 
 2. Install Project Dependencies: Run the following command to install all necessary dependencies for the project:
 
-pipenv install
+- pipenv install
 
 Step 5: Access the Quiz Game
 
 1. Activate the Virtual Environment: Enter the pipenv shell by running:
 
-pipenv shell
+- pipenv shell
 
 2. Navigate to the CLI Folder: Access the cli.py file by navigating to the appropriate directory:
 
-cd lib
+- cd lib
 
 3. Run the Quiz Game: Start the quiz game by running:
 
-python cli.py
+- python cli.py
 
 
 
