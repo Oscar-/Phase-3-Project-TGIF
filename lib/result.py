@@ -3,8 +3,6 @@ from feeling import Feeling
 from activity import Activity
 from __init__ import CURSOR, CONN
 
-
-
 class Results:
 
     all = {}
@@ -73,10 +71,8 @@ class Results:
 
             self.id = CURSOR.lastrowid
             Results.all[self.id] = self    
-
-        CONN.commit()  
+            CONN.commit()  
  
-    
     @classmethod
     def create(cls, person, feeling, activity):
         """ Initialize a new Result instance and save the object to the database. Return the new instance. """
@@ -88,7 +84,6 @@ class Results:
     def instance_from_db(cls, row):
         """Return an Result instance having the attribute values from the table row."""
         # Check the dictionary for  existing instance using the row's primary key
-        
         result_id, person, feeling, activity, created_at, updated_at = row
 
         if result_id in cls.all:
@@ -104,7 +99,6 @@ class Results:
         cls.all[result_id] = result
         return result
 
-
     @classmethod
     def find_by_id(cls, id):
         """Return a Result instance having the attribute values from the table row."""
@@ -115,11 +109,6 @@ class Results:
         if row:
             return cls.instance_from_db(row)
         return None    
-    
-        # if not row:
-        #     return None 
-        # else: 
-        #     return cls.create_instance(row)
     
     def update(self):
         """Update the table row corresponding to the current Result instance, and refresh the updated_at timestamp."""
@@ -141,7 +130,7 @@ class Results:
         if self.id in Results.all:
             del Results.all[self.id]
         
-        self.id = None  # Reassign id attribute to None
+        self.id = None 
     
     @classmethod
     def get_all(cls):
@@ -150,9 +139,6 @@ class Results:
         CURSOR.execute(sql)
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
-
-
-
     
     @property
     def activity_id(self):
@@ -189,9 +175,3 @@ class Results:
         if not isinstance(person_id, int) or Person.find_by_id(person_id) is None:
             raise ValueError("Person ID must reference a valid person")
         self._person_id = person_id
-    
-    
-
-
-    
-

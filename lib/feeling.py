@@ -1,6 +1,5 @@
 from __init__ import CURSOR, CONN
 
-
 class Feeling: 
     all=[]
 
@@ -12,10 +11,10 @@ class Feeling:
     def __repr__(self):
         return f"<feeling={self.feeling_name}, id={self.id} />"
 
-
     @property
     def feeling_name(self):
         return self._feeling_name 
+    
     @feeling_name.setter
     def feeling_name(self, value):
         if isinstance(value, str) and len(value) > 0:
@@ -34,7 +33,6 @@ class Feeling:
         CURSOR.execute(sql)
         CONN.commit()
     
-
     @classmethod
     def drop_table(cls):
         sql = """
@@ -51,7 +49,6 @@ class Feeling:
             CURSOR.execute(sql, (self.feeling_name, ))
             CONN.commit()
             self.id= CURSOR.lastrowid
-            # not sure if this is needed 
         except Exception as x: 
             print(f'something went wrong: {x}')
 
@@ -87,7 +84,7 @@ class Feeling:
             FROM feelings
             JOIN activity ON feelings.id = activity.feeling_id 
             WHERE activity.person_id = ?
-        """;
+        """
         CURSOR.execute(sql, (person_id,))
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]

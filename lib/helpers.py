@@ -1,15 +1,12 @@
 from person import Person
 from feeling import Feeling
 from activity import Activity
-from result import Results
+# from result import Results
 from __init__ import CURSOR, CONN
 
-
-
-# global cur_person
 cur_person = None
 
-
+#comm via param and return statements
 
 def print_cur_person():
     # global cur_person
@@ -49,10 +46,10 @@ def print_all_feelings():
         print('No feelings found')
 
 def print_all_feelings_for_person(person_id): 
-    person_id = int(person_id) # Ensure person_id is an integer 
-    feelings = Feeling.get_feelings_for_person(person_id) # Use the correct variable 
+    person_id = int(person_id)
+    feelings = Feeling.get_feelings_for_person(person_id)
     for feeling in feelings: 
-        print(f'{feeling.id}. {feeling.feeling_name}') # Use the correct attribute name
+        print(f'{feeling.id}. {feeling.feeling_name}')
 
 def print_activity(id):
     activity_instance = Activity.find_by_id(id)
@@ -69,22 +66,6 @@ def print_all_activities():
     else:
         print('No activities found')
 
-
-def print_activity(id):
-    activity_instance = Activity.find_by_id(id)
-    if activity_instance:
-        print(f'ID: {activity_instance.id}, Activity Name: {activity_instance.activity_name}')
-    else:
-        print(f'Activity with ID {id} not found')
-
-def print_all_activities():
-    activities = Activity.get_all()
-    if activities:
-        for activity in activities:
-            print(f'Activity: {activity.activity_name}')
-    else:
-        print('No activities found')
-
 def print_all_activities_for_person(person_id):
     activities = Activity.get_activities_for_person(person_id)
     if activities:
@@ -93,27 +74,32 @@ def print_all_activities_for_person(person_id):
     else:
         print(f'No activities found for person with ID {person_id}.')
 
-
 def print_activities_for_feeling(feeling_id):
-    # Retrieve the feeling by ID
     feeling = Feeling.find_by_id(feeling_id)
-    
     if not feeling:
         print(f"Feeling with ID {feeling_id} not found.")
         return
-    
-    # Retrieve activities associated with the feeling
     activities = Activity.get_activities_by_feeling(feeling_id)
-    
     if activities:
         print(f"Activities related to the feeling '{feeling.feeling_name}':")
         for activity in activities:
             print(f"- {activity.activity_name}")
     else:
         print(f"No activities found for the feeling '{feeling.feeling_name}'.")
+
+# future code for stretch goal
+# def print_all_activity_for_person():
+#     pass
+
+# def print_results_for_person():
+#     pass
+
+# def print_results_for_activity():
+#     pass
+
+# def print_results_for_feeling():
+#     pass
     
 
 
 
-
-# import ipdb; ipdb.set_trace()

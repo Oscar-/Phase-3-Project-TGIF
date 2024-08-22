@@ -34,7 +34,6 @@ class Activity:
         CURSOR.execute(sql)
         CONN.commit()
     
-
     @classmethod
     def drop_table(cls):
         sql = """
@@ -42,7 +41,7 @@ class Activity:
         """
         CURSOR.execute(sql)
         CONN.commit()
-  
+
     def save(self):
         try:
             if self.id is None:
@@ -61,13 +60,11 @@ class Activity:
         except Exception as x: 
             print(f'something went wrong: {x}')
 
-
     @property
     def person_id(self):
         return self._person_id
 
     @person_id.setter
-
     def person_id(self, value):
         if isinstance(value, int):
             self._person_id = value 
@@ -95,12 +92,9 @@ class Activity:
         if hasattr(self, '_feeling_id'):
             raise AttributeError("feeling_id cannot be updated once set.")
         if isinstance(value, int):
-        # and Feeling(value):
             self._feeling_id = value
         else:
             raise ValueError("Feeling ID must be the ID of an existing feeling instance.")
-
-
 
     @classmethod
     def find_by_id(cls, id):
@@ -119,7 +113,6 @@ class Activity:
         CURSOR.execute(sql)
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
-
     
     @classmethod
     def instance_from_db(cls, row):
