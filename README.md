@@ -12,6 +12,32 @@ CRUD:
 
 ![Screenshot 2024-08-18 at 4 43 49 PM](https://github.com/user-attachments/assets/e4950a12-3146-4978-8718-d4ff9294a0a7)
 
+Step 1: Fork the Repository
+1.	Go to the Repository: Navigate to the GitHub page of the repository you want to fork.
+2.	Fork the Repository: Click the "Fork" button at the top right of the page. This will create a copy of the repository in your GitHub account.
+Step 2: Clone the Repository
+1.	Open Your Terminal: Use any terminal application of your choice.
+2.	Clone the Repository: Copy the URL of the forked repository from your GitHub account and run the following command in the terminal:
+•	git clone "your-forked-repository-URL"
+Step 3: Open the Project in VS Code
+1.	Navigate to the Project Directory: Change into the directory of your cloned repository by running:
+•	cd "your-repository-name"
+2.	Open VS Code: Run the following command to open the project in Visual Studio Code:
+•	code .
+Step 4: Install Dependencies
+1.	Install pipenv: Ensure you have pipenv installed by running:
+•	pip install pipenv
+2.	Install Project Dependencies: Run the following command to install all necessary dependencies for the project:
+•	pipenv install
+Step 5: Access the Quiz Game
+1.	Activate the Virtual Environment: Enter the pipenv shell by running:
+•	pipenv shell
+2.	Navigate to the CLI Folder: Access the cli.py file by navigating to the appropriate directory:
+•	cd lib
+3.	Run the Quiz Game: Start the quiz game by running:
+•	python cli.py
+
+
 
 
 A decision tree of the flow of your CLI. Preferably a screenshot of a drawio diagram:
