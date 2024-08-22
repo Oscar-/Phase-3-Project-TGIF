@@ -19,8 +19,7 @@ class Person:
     
     def __repr__(self):
         return f"<person={self.name}, id={self.id} />"
-    
-
+  
     @classmethod
     def create_table(cls):
         sql = """
@@ -32,7 +31,6 @@ class Person:
         CURSOR.execute(sql)
         CONN.commit()
     
-
     @classmethod
     def drop_table(cls):
         sql = """
@@ -59,6 +57,19 @@ class Person:
         except Exception as z: 
             print(f'something went wrong: {z}')
 
+    def delete(self):
+        try:
+            if self.id is not None:
+                sql = """
+                    DELETE FROM persons WHERE id = ?
+                """
+                CURSOR.execute(sql, (self.id,))
+                CONN.commit()
+                print(f"Person with ID {self.id} has been deleted.")
+            else:
+                print("Cannot delete a person that hasn't been saved yet.")
+        except Exception as e:
+            print(f"Something went wrong: {e}")        
 
 
     @classmethod
@@ -91,6 +102,7 @@ class Person:
         person = cls(name=name)
         person.save()
         return person
+    
     
 
     
