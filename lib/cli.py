@@ -78,7 +78,7 @@ def sub_main():
         choice = get_choice()
         if int(choice) == 0:
             break  
-        elif int(choice) in range(1, 7):
+        elif int(choice) in range(1, 8):
             set_cur_person(choice)
             sub2_main()
         elif int(choice) == 8:
@@ -177,6 +177,17 @@ def select_feeling():
     except ValueError:
         print("Invalid input. Please enter a number.")
 
+def handle_selected_feeling(feeling):
+    # Example logic: Display feeling details
+    print(f"Details for feeling: {feeling.feeling_name}")
+    activities = Activity.get_activities_by_feeling(feeling.id)
+    if activities:
+        print("Activities related to this feeling:")
+        for activity in activities:
+            print(f"- {activity.activity_name}")
+    else:
+        print("No activities found for this feeling.")
+
 def menu():
     print(f"""
         Welcome to TGIF!
@@ -250,15 +261,4 @@ def delete_person():
 if __name__ == "__main__":
     main()
 
-#future code for stretch goal
 
-# def handle_selected_feeling(feeling):
-#     # Example logic: Display feeling details
-#     print(f"Details for feeling: {feeling.feeling_name}")
-#     activities = Activity.get_activities_by_feeling(feeling.id)
-#     if activities:
-#         print("Activities related to this feeling:")
-#         for activity in activities:
-#             print(f"- {activity.activity_name}")
-#     else:
-#         print("No activities found for this feeling.")

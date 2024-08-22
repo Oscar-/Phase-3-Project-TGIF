@@ -88,8 +88,6 @@ def print_activities_for_feeling(feeling_id):
         print(f"No activities found for the feeling '{feeling.feeling_name}'.")
 
 # future code for stretch goal
-# def print_all_activity_for_person():
-#     pass
 
 # def print_results_for_person():
 #     pass
