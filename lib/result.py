@@ -175,3 +175,6 @@ class Results:
         if not isinstance(person_id, int) or Person.find_by_id(person_id) is None:
             raise ValueError("Person ID must reference a valid person")
         self._person_id = person_id
+
+
+#stretch goals stringify time and date
