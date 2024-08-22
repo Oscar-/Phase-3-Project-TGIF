@@ -12,7 +12,8 @@ from helpers import (
     print_all_activities,
     print_all_activities_for_person
 )
-
+# import helpers
+# print(f"Current person set to: {cur_person.name}")
 cur_feeling = None
 cur_activity = None
 cur_person = None
@@ -21,8 +22,9 @@ def set_cur_person(person_id):
     global cur_person
     person_id = int(person_id)  # Ensure person_id is an integer
     cur_person = Person.find_by_id(person_id)
+    
     if cur_person:
-        print(f"Current person set to: {cur_person.name}")
+        return print_cur_person()
     else:
         print(f"Person with ID {person_id} not found.")
 
@@ -65,22 +67,25 @@ def main():
 def sub_main():
     while True:
         print("Who are you?")
-        print("1. Oscar")
-        print("2. Sebastian")
-        print("3. Linda")
-        print("4. Audrey")
-        print("5. Jason")
-        print("6. Stefan")
-        print("7. Rachel")
+        print("1. Manage Persons")
+        print("2. Oscar")
+        print("3. Sebastian")
+        print("4. Linda")
+        print("5. Audrey")
+        print("6. Jason")
+        print("7. Stefan")
+        print("8. Rachel")
         print("0. Back to main menu")
         choice = get_choice()
         
         if int(choice) == 0:
             break  # Return to the previous menu
-        elif int(choice) in range(1, 9):
+        elif int(choice) in range(2, 9):
             # Set the current person based on choice
             set_cur_person(choice)
             sub2_main()
+        elif int(choice) == 1:
+            manage_persons_menu()
         else:
             print("Invalid choice. Please try again.")
 
@@ -147,8 +152,8 @@ def sub3_main():
             elif int(choice) in range(1, 11):
                 set_cur_activity(choice)
                 sub4_main()
-        
-    
+                
+       
 def sub4_main():
     while True:
         if not cur_activity:
@@ -162,7 +167,8 @@ def sub4_main():
             if int(choice) == 0:
                 break  # Return to the previous menu
         
-    
+ 
+
          
 def select_feeling():
     print("Select a feeling by number:")
@@ -198,6 +204,73 @@ def menu():
         Enter 0 to exit 
         Enter 1 to start quiz
         """)
+    
+def sub_menu():
+    print(f"""
+      Great choice! Thanks for playing. 
+        """)
+    
+def manage_persons_menu():
+    while True:
+        print("""
+        Manage Persons:
+        1. Create a new person
+        2. View all persons
+        3. Update a person
+        4. Delete a person
+        0. Back to main menu
+        """)
+        choice = get_choice()
+        if choice == 0:
+            break
+        elif choice == 1:
+            create_person()
+        elif choice == 2:
+            view_all_persons()
+        elif choice == 3:
+            update_person()
+        elif choice == 4:
+            delete_person()
+        else:
+            print("Invalid choice. Please try again.")
+
+def create_person():
+    name = input("Enter the person's name: ")
+    new_person = Person(name=name)
+    new_person.save()
+    print(f"Person '{name}' created with ID {new_person.id}.")
+
+def view_all_persons():
+    persons = Person.get_all()
+    if persons:
+        for person in persons:
+            print(f"ID: {person.id}, Name: {person.name}")
+    else:
+        print("No persons found.")
+
+def update_person():
+    person_id = int(input("Enter the ID of the person to update: "))
+    person = Person.find_by_id(person_id)
+    if person:
+        new_name = input(f"Enter the new name for {person.name}: ")
+        person.name = new_name
+        person.save()  # Assuming save() updates if the person already exists
+        print(f"Person ID {person_id} updated to '{new_name}'.")
+    else:
+        print(f"Person with ID {person_id} not found.")
+
+def delete_person():
+    person_id = int(input("Enter the ID of the person to delete: "))
+    person = Person.find_by_id(person_id)
+    if person:
+        person.delete()
+        print(f"Person ID {person_id} deleted.")
+    else:
+        print(f"Person with ID {person_id} not found.")
+
+
 
 if __name__ == "__main__":
     main()
+
+
