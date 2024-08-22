@@ -97,7 +97,7 @@ def sub2_main():
             # continue
 
         else:
-            print(f"How are you feeling on this Friday, {cur_person.name}?")
+            print(f"How are you feeling today, {cur_person.name}?")
             print("1. Happy")
             print("2. Sad")
             print("3. Excited")
