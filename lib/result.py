@@ -58,7 +58,8 @@ class Results:
         if self.id:
             sql = """
                 UPDATE results
-                SET person_id = ?, feeling_id = ?, activity_id = ?, updated_at = CURRENT_TIMESTAMP
+                SET person_id = ?, feeling_id cd lib
+                = ?, activity_id = ?, updated_at = CURRENT_TIMESTAMP
                 WHERE id = ?
             """
             CURSOR.execute(sql, (self.person, self.feeling, self.activity, self.id))
@@ -175,3 +176,5 @@ class Results:
         if not isinstance(person_id, int) or Person.find_by_id(person_id) is None:
             raise ValueError("Person ID must reference a valid person")
         self._person_id = person_id
+
+# stretch goals -- stringify time and date
