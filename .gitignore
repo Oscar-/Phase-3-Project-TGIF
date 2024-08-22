@@ -1,4 +1,9 @@
 resources.db
 */resources.db 
-.venv
-*/.venv 
+
+.venv/
+venv/
+*/venv
+
+__pycache__/
+*.py[cod]

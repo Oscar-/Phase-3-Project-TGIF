@@ -59,6 +59,8 @@ class Person:
         except Exception as z: 
             print(f'something went wrong: {z}')
 
+
+
     @classmethod
     def find_by_id(cls, id):
         """Return a Person instance having the attribute values from the table row."""
@@ -83,4 +85,12 @@ class Person:
         rows = CURSOR.fetchall()
         return [cls.instance_from_db(row) for row in rows]
     
+    @classmethod
+    def create(cls, name):
+        """Initialize a new Person instance and save it to the database."""
+        person = cls(name=name)
+        person.save()
+        return person
+    
+
     

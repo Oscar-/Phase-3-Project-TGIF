@@ -12,10 +12,11 @@ cur_person = None
 
 
 def print_cur_person():
+    # global cur_person
     if cur_person:
-        print(f'ID: {cur_person.id}, Name: {cur_person.name}')
+        return (f'Current person set to: {cur_person.name}.')
     else:
-        print('No current person set')
+        return (f'No current person set')
 
 def print_person(id):
     person_instance = Person.find_by_id(id)
@@ -91,6 +92,25 @@ def print_all_activities_for_person(person_id):
             print(f'Activity ID: {activity.id}, Name: {activity.activity_name}, Feeling ID: {activity.feeling_id}')
     else:
         print(f'No activities found for person with ID {person_id}.')
+
+
+def print_activities_for_feeling(feeling_id):
+    # Retrieve the feeling by ID
+    feeling = Feeling.find_by_id(feeling_id)
+    
+    if not feeling:
+        print(f"Feeling with ID {feeling_id} not found.")
+        return
+    
+    # Retrieve activities associated with the feeling
+    activities = Activity.get_activities_by_feeling(feeling_id)
+    
+    if activities:
+        print(f"Activities related to the feeling '{feeling.feeling_name}':")
+        for activity in activities:
+            print(f"- {activity.activity_name}")
+    else:
+        print(f"No activities found for the feeling '{feeling.feeling_name}'.")
     
 
 
